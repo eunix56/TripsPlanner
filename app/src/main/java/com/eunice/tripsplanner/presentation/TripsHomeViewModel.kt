@@ -5,23 +5,23 @@ import androidx.lifecycle.viewModelScope
 import com.eunice.tripsplanner.network.GetCitiesDataSource
 import com.eunice.tripsplanner.network.TripsContractImpl
 import com.eunice.tripsplanner.network.model.Activity
-import com.eunice.tripsplanner.network.model.CitiesResponse
+import com.eunice.tripsplanner.network.model.City
 import com.eunice.tripsplanner.network.model.ErrorResponse
 import com.eunice.tripsplanner.network.model.Flight
 import com.eunice.tripsplanner.network.model.Hotel
 import com.eunice.tripsplanner.network.model.Trip
 import com.eunice.tripsplanner.network.model.TripUploadModel
+import com.squareup.moshi.JsonDataException
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.cancellable
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
@@ -35,6 +35,9 @@ class TripsHomeViewModel: ViewModel() {
     private val tripsContract = TripsContractImpl()
     private val citiesDataSource = GetCitiesDataSource()
 
+    val _tripUiState = MutableStateFlow(TripsUiState())
+    val tripsUiState: StateFlow<TripsUiState> = _tripUiState
+
     val _postTripUiState = MutableStateFlow(PostTripsUiState())
     val postTripsUiState: StateFlow<PostTripsUiState> = _postTripUiState
 
@@ -47,14 +50,37 @@ class TripsHomeViewModel: ViewModel() {
     val _activitiesUiState = MutableStateFlow(ActivitiesUiState())
     val activitiesUiState: StateFlow<ActivitiesUiState> = _activitiesUiState
 
-    val _namePrefix = MutableStateFlow(String())
-
-    var city: String? = null
+    var cityName: String? = null
     lateinit var startDate: String
     lateinit var endDate: String
 
+    var userTrip: Trip? = null
+
+    private val _cityUiNames =
+        MutableStateFlow(CityUiState())
+    val cityUiNames: StateFlow<CityUiState> =
+        _cityUiNames
+
+    private var cityUiNameJob: Job? = null
+
+    private val cityUiExceptionHandler = CoroutineExceptionHandler { _, throwable ->
+        _cityUiNames.update { it.copy(
+            loading = false,
+            error = throwable.getErrorMsg()?.message
+        )
+        }
+    }
+
     private val postTripsExceptionHandler = CoroutineExceptionHandler { _, throwable ->
         _postTripUiState.update { it.copy(
+            loading = false,
+            error = throwable.getErrorMsg()?.message
+        )
+        }
+    }
+
+    private val tripsExceptionHandler = CoroutineExceptionHandler { _, throwable ->
+        _tripUiState.update { it.copy(
             loading = false,
             error = throwable.getErrorMsg()?.message
         )
@@ -85,18 +111,33 @@ class TripsHomeViewModel: ViewModel() {
         }
     }
 
+    fun getTripStartDate(): String =
+        if (::startDate.isInitialized) startDate else "25-04-2024"
+
+    fun getTripEndDate(): String = if (::endDate.isInitialized) endDate else "25-04-2024"
+
+    fun getCity(): String? = cityName
+
     fun setCity(selectedCity: String?) {
-        city = selectedCity
+        cityName = selectedCity
     }
 
-    fun setName(name: String) {
-        _namePrefix.value = name
+    fun setTrip(postedTrip: Trip) {
+        userTrip = postedTrip
     }
 
-    fun getTrips(): Flow<List<Trip>> =
-        tripsContract.getTrips().catch {
-            it.getErrorMsg()
+    fun getTrip(): Trip? {
+        return userTrip
+    }
+
+    fun getTrips() {
+        _tripUiState.update { it.copy(loading = true) }
+
+        viewModelScope.launch(tripsExceptionHandler) {
+            val trip = tripsContract.getTrips()
+            _tripUiState.update { it.copy(loading = false, success = trip) }
         }
+    }
 
 
     fun postTrip(name: String,
@@ -112,24 +153,32 @@ class TripsHomeViewModel: ViewModel() {
                     name, travelStyle, location, startDate, endDate
                 )
             )
-            _postTripUiState.update { it.copy(success = trip) }
+            _postTripUiState.update { it.copy(loading = false, success = trip) }
         }
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
-    fun getCities(): Flow<CitiesResponse> =
-        _namePrefix.flatMapLatest {
-            citiesDataSource.getCities(it)
-        }.catch {
-            it.getErrorMsg()
+    fun getCities(name: String) {
+        cityUiNameJob = viewModelScope.launch(cityUiExceptionHandler) {
+            _cityUiNames.update { it.copy(loading = true) }
+            val cityNames = citiesDataSource.getCities(name)
+            _cityUiNames.update {
+                it.copy(loading = false, success = cityNames)
+            }
         }
+        cityUiNameJob?.start()
+    }
+
+    fun cancelJob() {
+        cityUiNameJob?.cancel()
+    }
+
 
     fun getFlights() {
         _flightsUiState.update { it.copy(loading = true) }
 
         viewModelScope.launch(flightsExceptionHandler) {
             val flights = tripsContract.getFlights()
-            _flightsUiState.update { it.copy(success = flights.flights) }
+            _flightsUiState.update { it.copy(loading = false, success = flights.flights) }
         }
     }
 
@@ -138,7 +187,7 @@ class TripsHomeViewModel: ViewModel() {
 
         viewModelScope.launch(hotelsExceptionHandler) {
             val hotels = tripsContract.getHotels()
-            _hotelsUiState.update { it.copy(success = hotels.hotels) }
+            _hotelsUiState.update { it.copy(loading = false, success = hotels.hotels) }
         }
     }
 
@@ -147,12 +196,18 @@ class TripsHomeViewModel: ViewModel() {
 
         viewModelScope.launch(activitiesExceptionHandler) {
             val activity = tripsContract.getActivities()
-            _activitiesUiState.update { it.copy(success = activity.activities) }
+            _activitiesUiState.update { it.copy(loading = false, success = activity.activities) }
         }
     }
 
 
 }
+
+data class TripsUiState(
+    val loading: Boolean = false,
+    val success: List<Trip> = emptyList(),
+    val error: String? = null
+)
 
 data class PostTripsUiState(
     val loading: Boolean = false,
@@ -178,13 +233,24 @@ data class ActivitiesUiState(
     val error: String? = null
 )
 
+data class CityUiState(
+    val loading: Boolean = false,
+    val success: List<City> = emptyList(),
+    val error: String? = null
+)
+
 fun Throwable.getErrorMsg(): ErrorResponse? {
     val errorMsg = "An error occurred"
     return if (this is HttpException) {
         // Kotlin will smart cast at this point
         val errorJsonString = response()?.errorBody()?.string()
-        errorJsonString?.let { Moshi.Builder().add(KotlinJsonAdapterFactory())
-            .build().adapter(ErrorResponse::class.java).fromJson(it) }
+        try {
+            errorJsonString?.let { Moshi.Builder().add(KotlinJsonAdapterFactory())
+                .build().adapter(ErrorResponse::class.java).fromJson(it) }
+        } catch (e: JsonDataException) {
+            e.localizedMessage?.let { ErrorResponse(e.message, it) }
+        }
+
     } else {
         ErrorResponse(null, message ?: errorMsg)
     }

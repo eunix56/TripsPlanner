@@ -1,16 +1,15 @@
 package com.eunice.tripsplanner.presentation
 
-import android.os.Build
-import androidx.annotation.RequiresApi
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.eunice.tripsplanner.databinding.ItemTripCardBinding
 import com.eunice.tripsplanner.network.model.Trip
-import java.time.Instant
-import java.time.LocalDateTime
+import java.time.LocalDate
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
-import java.util.Locale
 import java.util.concurrent.TimeUnit
 
 /**
@@ -20,13 +19,13 @@ import java.util.concurrent.TimeUnit
 
 const val FULL_DATE_PATTERN = "yyyy-MM-dd"
 
-class TripsAdapter {
+class TripsAdapter: ListAdapter<Trip, TripsAdapter.TripsViewHolder>(DIFF_UTIL) {
 
-    class TripsViewHolder(val itemTripCardBinding: ItemTripCardBinding)
+    class TripsViewHolder(private val itemTripCardBinding: ItemTripCardBinding)
         : RecyclerView.ViewHolder(itemTripCardBinding.root) {
 
             fun bind(trip: Trip) = with(itemTripCardBinding) {
-                val days = TimeUnit.SECONDS.toDays(
+                val days = TimeUnit.MILLISECONDS.toDays(
                     getLongDateTime(trip.endDate) - getLongDateTime(trip.startDate)
                 )
                 tvTripName.text = trip.name
@@ -47,20 +46,28 @@ class TripsAdapter {
 
         }
     }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TripsViewHolder {
+        return TripsViewHolder(
+            ItemTripCardBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
+    }
+
+    override fun onBindViewHolder(holder: TripsViewHolder, position: Int) {
+       holder.bind(getItem(position))
+    }
 }
 
 
 fun getLongDateTime(date: String): Long {
-    return LocalDateTime.parse(date,
+    return LocalDate.parse(date,
         DateTimeFormatter.ofPattern(FULL_DATE_PATTERN))
+        .atStartOfDay()
         .atZone(ZoneId.systemDefault())
         .toInstant()
         .toEpochMilli()
-}
-
-fun getDateAsString(timeInMillis: Long): String {
-    val localDate = Instant.ofEpochMilli(timeInMillis).atZone(ZoneId.systemDefault()).toLocalDate()
-    val formatter = DateTimeFormatter.ofPattern(FULL_DATE_PATTERN, Locale.getDefault())
-
-    return localDate.format(formatter)
 }

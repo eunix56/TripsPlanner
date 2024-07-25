@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -33,16 +34,22 @@ class WhereTripsFragment : Fragment(R.layout.fragment_where_trips) {
         super.onViewCreated(view, savedInstanceState)
 
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.getCities().flowWithLifecycle(viewLifecycleOwner.lifecycle).collectLatest {
-                if (it.data != null) {
-                    setupAdapter(it.data.map { it.name })
+            viewModel.cityUiNames.flowWithLifecycle(viewLifecycleOwner.lifecycle).collectLatest {
+                if (it.loading) Toast.makeText(context, "Loading...", Toast.LENGTH_LONG).show()
+                else if (it.success.isNotEmpty()) {
+                    setupAdapter(it.success.map { it.name })
                     if (!itemSelected) {
                         binding.actvCities.showDropDown()
                     }
+                } else if (it.error != null) {
+                    Toast.makeText(context, it.error, Toast.LENGTH_LONG).show()
                 }
             }
         }
 
+        binding.tvWhereToolbar.setNavigationOnClickListener {
+            requireActivity().supportFragmentManager.popBackStack()
+        }
         setupAutoCompleteDropDown()
     }
 
@@ -62,12 +69,15 @@ class WhereTripsFragment : Fragment(R.layout.fragment_where_trips) {
 
     private fun setupAutoCompleteDropDown() = with(binding) {
         actvCities.setOnItemClickListener { _, _, i, _ ->
+            viewModel.cancelJob()
             itemSelected = true
             viewModel.setCity(adapter?.getItem(i))
+            requireActivity().supportFragmentManager.popBackStack()
         }
 
         actvCities.threshold = 2
         actvCities.doOnTextChanged { s: CharSequence?, _, _, _ ->
+            viewModel.cancelJob()
             val keyword = s.toString()
 
             if (keyword.length > MIN_CHAR) {
@@ -76,8 +86,8 @@ class WhereTripsFragment : Fragment(R.layout.fragment_where_trips) {
                         itemSelected = false
                         return@Runnable
                     }
-                    viewModel.setName(keyword)
-                }, 300)
+                    viewModel.getCities(keyword)
+                }, 100)
             }
         }
     }

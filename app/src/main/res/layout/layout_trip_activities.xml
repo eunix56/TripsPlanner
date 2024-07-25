@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="wrap_content">
 
     <FrameLayout
@@ -43,7 +44,7 @@
         tools:text="Riviera Resort, Lekki" />
 
     <TextView
-        android:id="@+id/tv_activity_address"
+        android:id="@+id/tv_activity_desc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
@@ -58,14 +59,13 @@
         tools:text="Works from Van Gogh to Warhol &amp; beyond plus a sculpture garden, 2 cafes &amp; The modern restaurant" />
 
     <LinearLayout
-        android:id="@+id/tv_activity_desc"
+        android:id="@+id/ll_activity_desc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="3"
-        app:layout_constraintEnd_toEndOf="@id/tv_activity_address"
-        app:layout_constraintStart_toStartOf="@id/tv_activity_address"
-        app:layout_constraintTop_toBottomOf="@id/tv_activity_address">
+        app:layout_constraintEnd_toEndOf="@id/tv_activity_desc"
+        app:layout_constraintStart_toStartOf="@id/tv_activity_desc"
+        app:layout_constraintTop_toBottomOf="@id/tv_activity_desc">
 
         <TextView
             android:id="@+id/tv_activity_map"
@@ -80,14 +80,13 @@
             android:textSize="14sp"
             app:drawableStartCompat="@drawable/ic_location"
             app:drawableTint="@color/primary_blue"
-            app:layout_constraintStart_toStartOf="@id/tv_activity_address"
-            app:layout_constraintTop_toBottomOf="@id/tv_activity_address" />
+            app:layout_constraintStart_toStartOf="@id/tv_activity_desc"
+            app:layout_constraintTop_toBottomOf="@id/tv_activity_desc" />
 
         <TextView
             android:id="@+id/tv_activity_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="6dp"
             android:layout_weight="1"
             android:drawablePadding="4dp"
@@ -96,8 +95,8 @@
             android:textSize="14sp"
             app:drawableStartCompat="@drawable/ic_star"
             app:layout_constraintStart_toEndOf="@id/tv_activity_map"
-            app:layout_constraintTop_toBottomOf="@id/tv_activity_address"
-            tools:text="4.5(879)" />
+            app:layout_constraintTop_toBottomOf="@id/tv_activity_desc"
+            android:text="4.5(879)" />
 
         <TextView
             android:id="@+id/tv_activity_type"
@@ -110,7 +109,7 @@
             android:textColor="@color/text_desc_color"
             android:textSize="14sp"
             app:drawableStartCompat="@drawable/ic_bed"
-            tools:text="King size room" />
+            android:text="King size room" />
     </LinearLayout>
 
     <LinearLayout
@@ -124,7 +123,7 @@
         android:weightSum="1.2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_activity_desc">
+        app:layout_constraintTop_toBottomOf="@id/ll_activity_desc">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -243,6 +242,7 @@
         tools:text="NGN 124,000" />
 
     <FrameLayout
+        android:id="@+id/tv_remove_activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#FBEAE9"

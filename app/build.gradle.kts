@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("kotlin-parcelize")
+    id("kotlin-kapt")
 }
 
 android {
@@ -53,6 +55,7 @@ dependencies {
     implementation(libs.logging)
     implementation(libs.converter)
     implementation(libs.fragment)
+    kapt(libs.moshi.codegen)
     implementation(libs.androidx.viewmodel)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

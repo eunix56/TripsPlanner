@@ -14,21 +14,9 @@
         <item name="android:fontFamily">@font/satoshi_bold</item>
     </style>
 
-    <style name="MaterialCalendarTheme" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
-        <item name="materialCalendarFullscreenTheme">@style/ThemeOverlay.MaterialComponents.MaterialCalendar.Fullscreen</item>
-    </style>
-
-    <style name="ThemeMaterialCalendarTextButton" parent="Widget.MaterialComponents.Button.TextButton.Dialog.Flush">
+    <style name="TravelStyle" parent="Widget.AppCompat.PopupMenu">
         <item name="android:textColor">@color/text_color</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:fontFamily">@font/satoshi_medium</item>
-    </style>
-
-    <style name="CustomMaterialCalendar" parent="Widget.MaterialComponents.MaterialCalendar">
-        <item name="daySelectedStyle">@style/CustomSelected</item>
-    </style>
-
-    <style name= "CustomSelected" parent="Widget.MaterialComponents.MaterialCalendar.Day.Selected">
-        <item name="itemFillColor">@color/primary_blue</item>
-        <item name="fontFamily">@font/satoshi_medium</item>
     </style>
 </resources>

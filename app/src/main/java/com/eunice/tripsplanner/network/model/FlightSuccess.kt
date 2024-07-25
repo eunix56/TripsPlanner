@@ -1,17 +1,20 @@
 package com.eunice.tripsplanner.network.model
 
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
 /**
  * Created by {EUNICE BAKARE T.} on {7/24/24}
  * Email: {eunice@reach.africa}
  */
 
+@JsonClass(generateAdapter = true)
 class FlightSuccess(
     val status: String,
     val flights: List<Flight>,
 )
 
+@JsonClass(generateAdapter = true)
 class Flight(
     val id: Int,
     val name: String,

@@ -1,16 +1,17 @@
 package com.eunice.tripsplanner.network
 
-import com.eunice.tripsplanner.network.model.CitiesResponse
+
+import com.eunice.tripsplanner.network.model.City
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Header
+import retrofit2.http.Headers
 import retrofit2.http.Query
 
 /**
@@ -18,12 +19,15 @@ import retrofit2.http.Query
  * Email: {eunice@reach.africa}
  */
 
-const val CITIES_BASE_URL = "https://wft-geo-db.p.rapidapi.com/"
+const val API_KEY = "s1jiQlkcnNGdmn0MjwOvvQ==bpPhu8SeUHAq6T1l"
+const val CITIES_BASE_URL = "https://api.api-ninjas.com/"
 
 interface GetCitiesService {
 
-    @GET("v1/geo/places")
-    fun getCities(@Query("namePrefix") namePrefix: String): Flow<CitiesResponse>
+    @GET("v1/city")
+    @Headers("X-API-KEY: $API_KEY")
+    suspend fun getCities(@Query("name") namePrefix: String,
+                  @Query("limit") limit: Int = 5): List<City>
 }
 
 class GetCitiesDataSource {
@@ -43,6 +47,9 @@ class GetCitiesDataSource {
             .build()
             .create(GetCitiesService::class.java)
 
-    fun getCities(namePrefix: String): Flow<CitiesResponse> =
-        networkApi.getCities(namePrefix).flowOn(Dispatchers.IO)
+    suspend fun getCities(namePrefix: String): List<City> {
+        return withContext(Dispatchers.IO) {
+            networkApi.getCities(namePrefix)
+        }
+    }
 }

@@ -1,175 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
-        android:id="@+id/iv_trips_design"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/trips_design"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="29dp"
-        android:layout_marginStart="16dp"
-        android:src="@drawable/ic_trips_design"
-        />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_create_trip"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        app:behavior_hideable="true"
+        app:behavior_peekHeight="0dp"
+        android:layout_gravity="bottom"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/iv_close"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/trips_design"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="29dp"
-        android:layout_marginEnd="20dp"
-        android:src="@drawable/ic_close"
-        />
+        <ImageView
+            android:id="@+id/iv_trips_design"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="29dp"
+            android:contentDescription="@string/trips_design"
+            android:src="@drawable/ic_trips_design"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_create_trip"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        app:layout_constraintTop_toBottomOf="@id/iv_trips_design"
-        app:layout_constraintStart_toStartOf="@id/iv_trips_design"
-        android:text="@string/create_a_trip"
-        android:textColor="@color/text_color"
-        android:fontFamily="@font/satoshi_bold"
-        android:textSize="14sp"
-        android:layout_marginTop="16dp"
-        />
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="29dp"
+            android:layout_marginEnd="20dp"
+            android:contentDescription="@string/trips_design"
+            android:src="@drawable/ic_close"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_trip_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/build_your_next_adventure"
-        android:textSize="12sp"
-        android:textColor="@color/text_desc_color"
-        android:fontFamily="@font/satoshi_medium"
-        android:layout_marginTop="4dp"
-        app:layout_constraintStart_toStartOf="@id/tv_create_trip"
-        app:layout_constraintTop_toBottomOf="@id/tv_create_trip"
-        />
+        <TextView
+            android:id="@+id/tv_create_trip"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/satoshi_bold"
+            android:text="@string/create_a_trip"
+            android:textColor="@color/text_color"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@id/iv_trips_design"
+            app:layout_constraintTop_toBottomOf="@id/iv_trips_design" />
 
-    <TextView
-        android:id="@+id/tv_trip_name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tv_trip_text"
-        app:layout_constraintStart_toStartOf="@id/iv_trips_design"
-        android:text="@string/trip_name"
-        android:textColor="@color/text_color"
-        android:fontFamily="@font/satoshi_medium"
-        android:textSize="14sp"
-        android:layout_marginTop="20dp"
-        />
+        <TextView
+            android:id="@+id/tv_trip_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/satoshi_medium"
+            android:text="@string/build_your_next_adventure"
+            android:textColor="@color/text_desc_color"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@id/tv_create_trip"
+            app:layout_constraintTop_toBottomOf="@id/tv_create_trip" />
 
-    <EditText
-        android:id="@+id/et_trip_name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:autofillHints="name"
-        android:inputType="textCapWords"
-        app:layout_constraintTop_toBottomOf="@id/tv_trip_name"
-        app:layout_constraintStart_toStartOf="@id/tv_create_trip"
-        android:background="@drawable/bg_form_input"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="16dp"
-        android:padding="15dp"
-        android:textSize="14sp"
-        android:layout_marginTop="8dp"
-        android:hint="@string/enter_the_trip_name"
-        android:fontFamily="@font/satoshi_medium"
-        />
+        <TextView
+            android:id="@+id/tv_trip_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/satoshi_medium"
+            android:text="@string/trip_name"
+            android:textColor="@color/text_color"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@id/iv_trips_design"
+            app:layout_constraintTop_toBottomOf="@id/tv_trip_text" />
 
-    <TextView
-        android:id="@+id/tv_travel_style"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/et_trip_name"
-        app:layout_constraintStart_toStartOf="@id/iv_trips_design"
-        android:text="@string/travel_style"
-        android:textColor="@color/text_color"
-        android:fontFamily="@font/satoshi_medium"
-        android:textSize="14sp"
-        android:layout_marginTop="12dp"
-        />
+        <EditText
+            android:id="@+id/et_trip_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:autofillHints="name"
+            android:background="@drawable/bg_form_input"
+            android:fontFamily="@font/satoshi_medium"
+            android:hint="@string/enter_the_trip_name"
+            android:inputType="textCapWords"
+            android:padding="15dp"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tv_create_trip"
+            app:layout_constraintTop_toBottomOf="@id/tv_trip_name" />
 
-    <TextView
-        android:id="@+id/tv_pick_style"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:drawableEndCompat="@drawable/ic_dropdown"
-        app:layout_constraintTop_toBottomOf="@id/tv_travel_style"
-        app:layout_constraintStart_toStartOf="@id/tv_create_trip"
-        android:background="@drawable/bg_form_input"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="16dp"
-        android:padding="15dp"
-        android:text="@string/select_your_travel_style"
-        android:textSize="14sp"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/satoshi_medium"
-        android:textColor="@color/text_desc_color"
-        />
+        <TextView
+            android:id="@+id/tv_travel_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/satoshi_medium"
+            android:text="@string/travel_style"
+            android:textColor="@color/text_color"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@id/iv_trips_design"
+            app:layout_constraintTop_toBottomOf="@id/et_trip_name" />
 
-    <TextView
-        android:id="@+id/tv_trip_desc"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tv_pick_style"
-        app:layout_constraintStart_toStartOf="@id/iv_trips_design"
-        android:text="@string/trip_description"
-        android:textColor="@color/text_color"
-        android:fontFamily="@font/satoshi_medium"
-        android:textSize="14sp"
-        android:layout_marginTop="12dp"
-        />
+        <TextView
+            android:id="@+id/tv_pick_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/bg_form_input"
+            android:fontFamily="@font/satoshi_medium"
+            android:padding="15dp"
+            android:text="@string/select_your_travel_style"
+            android:textColor="@color/text_desc_color"
+            android:textSize="14sp"
+            app:drawableEndCompat="@drawable/ic_dropdown"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tv_create_trip"
+            app:layout_constraintTop_toBottomOf="@id/tv_travel_style" />
 
-    <EditText
-        android:id="@+id/et_trip_desc"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:importantForAutofill="no"
-        android:gravity="top"
-        android:inputType="textAutoCorrect|textCapSentences"
-        android:lineSpacingExtra="6sp"
-        android:minHeight="188dp"
-        android:scrollHorizontally="false"
-        android:maxLines="11"
-        android:imeOptions="actionDone"
-        android:background="@drawable/bg_form_input"
-        app:layout_constraintTop_toBottomOf="@id/tv_trip_desc"
-        app:layout_constraintStart_toStartOf="@id/tv_create_trip"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="16dp"
-        android:padding="14dp"
-        android:textSize="14sp"
-        android:layout_marginTop="8dp"
-        android:hint="@string/tell_us_more_about_the_trip"
-        android:fontFamily="@font/satoshi_medium"
-        />
+        <TextView
+            android:id="@+id/tv_trip_desc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/satoshi_medium"
+            android:text="@string/trip_description"
+            android:textColor="@color/text_color"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@id/iv_trips_design"
+            app:layout_constraintTop_toBottomOf="@id/tv_pick_style" />
 
-    <TextView
-        android:id="@+id/btn_create_trip"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/tv_create_trip"
-        app:layout_constraintEnd_toEndOf="@id/et_trip_desc"
-        android:paddingVertical="16dp"
-        android:text="@string/next"
-        android:enabled="false"
-        app:layout_constraintTop_toBottomOf="@id/et_trip_desc"
-        android:background="@drawable/bg_btn"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/satoshi_medium"
-        android:textSize="14sp"
-        android:gravity="center_horizontal"
-        android:textColor="@color/white"
-        />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <EditText
+            android:id="@+id/et_trip_desc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/bg_form_input"
+            android:fontFamily="@font/satoshi_medium"
+            android:gravity="top"
+            android:hint="@string/tell_us_more_about_the_trip"
+            android:imeOptions="actionDone"
+            android:importantForAutofill="no"
+            android:inputType="textAutoCorrect|textCapSentences"
+            android:lineSpacingExtra="6sp"
+            android:maxLines="11"
+            android:minHeight="188dp"
+            android:padding="14dp"
+            android:scrollHorizontally="false"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tv_create_trip"
+            app:layout_constraintTop_toBottomOf="@id/tv_trip_desc" />
+
+        <TextView
+            android:id="@+id/btn_create_trip"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_btn"
+            android:enabled="false"
+            android:fontFamily="@font/satoshi_medium"
+            android:gravity="center_horizontal"
+            android:paddingVertical="16dp"
+            android:text="@string/next"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@id/et_trip_desc"
+            app:layout_constraintStart_toStartOf="@id/tv_create_trip"
+            app:layout_constraintTop_toBottomOf="@id/et_trip_desc" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

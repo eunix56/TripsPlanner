@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.Flow
 interface TripsContract {
     suspend fun postTrips(tripUploadModel: TripUploadModel): Trip
 
-    fun getTrips(): Flow<List<Trip>>
+    suspend fun getTrips(): List<Trip>
 
     suspend fun updateTrip(id: String, tripUpdate: TripUpdate): TripUpdateSuccess
 

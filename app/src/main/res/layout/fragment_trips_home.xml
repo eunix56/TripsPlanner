@@ -99,6 +99,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/tv_city"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/select_city"
@@ -148,6 +149,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/tv_start_date_val"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/enter_date"
@@ -197,6 +199,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/tv_end_date_val"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/enter_date"
@@ -211,6 +214,7 @@
             </RelativeLayout>
 
             <TextView
+                android:id="@+id/btn_create_a_trip"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
@@ -292,6 +296,7 @@
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_trips"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/ll_planned_trips"
@@ -302,17 +307,22 @@
             android:layout_marginTop="16dp"
             tools:listitem="@layout/item_trip_card"/>
 
+        <View
+            android:id="@+id/dark_overlay"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@color/black_opacity_60"
+            android:visibility="gone"
+            />
+
+        <include
+            android:id="@+id/create_trip_sheet"
+            layout="@layout/layout_create_trip" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <View
-        android:id="@+id/dark_overlay"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/black_opacity_60"
-        android:visibility="gone" />
-
-    <include
-        android:id="@+id/create_trip_sheet"
-        layout="@layout/layout_create_trip" />
 
 </androidx.core.widget.NestedScrollView>
