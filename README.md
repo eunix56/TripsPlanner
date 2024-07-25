@@ -12,6 +12,7 @@ The TripsPlanner app is an Android application that allows you to plan a trip.
 GET - Read list of trips,
 POST - write a trip,
 PUT - update a trip
+The API has a limit of 50 requests daily 
 
 * [Flights API](https://ca390c5dcd58519c752a.free.beeceptor.com/api/flights)
 GET - Read list of flights
