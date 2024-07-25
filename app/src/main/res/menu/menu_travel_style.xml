@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/solo"
+        android:title="@string/solo"
+        />
+
+    <item android:id="@+id/couple"
+        android:title="@string/couple"
+        />
+
+    <item android:id="@+id/family"
+        android:title="@string/family"
+        />
+
+    <item android:id="@+id/group"
+        android:title="@string/group"
+        />
+</menu>

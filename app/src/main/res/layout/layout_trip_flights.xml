@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/bg_form">
+
+    <ImageView
+        android:id="@+id/iv_flight_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/american_airlines_img"
+        app:layout_constraintTop_toTopOf="@id/tv_flight_name"
+        app:layout_constraintBottom_toBottomOf="@id/tv_flight_code"
+        android:contentDescription="@string/airlines_image"
+        />
+
+    <TextView
+        android:id="@+id/tv_flight_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/iv_flight_image"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="12dp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/your_trips"
+        android:textColor="@color/text_color"
+        android:fontFamily="@font/satoshi_bold"
+        android:textSize="14sp"
+        />
+
+    <TextView
+        android:id="@+id/tv_flight_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv_flight_name"
+        app:layout_constraintStart_toStartOf="@id/tv_flight_name"
+        tools:text="AA 249"
+        android:fontFamily="@font/satoshi_medium"
+        android:textSize="12sp"
+        android:layout_marginTop="2dp"
+        android:textColor="@color/text_desc_color"
+        />
+
+    <TextView
+        android:id="@+id/tv_flight_start_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/iv_flight_image"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="12dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_flight_code"
+        tools:text="08:45"
+        android:textColor="@color/text_color"
+        android:fontFamily="@font/satoshi_bold"
+        android:textSize="16sp"
+        />
+
+    <TextView
+        android:id="@+id/tv_flight_start_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv_flight_start_time"
+        app:layout_constraintStart_toStartOf="@id/tv_flight_start_time"
+        tools:text="Sun, 20 Aug"
+        android:fontFamily="@font/satoshi_medium"
+        android:textSize="12sp"
+        android:layout_marginTop="2dp"
+        android:textColor="@color/text_desc_color"
+        />
+
+    <ImageView
+        android:id="@+id/iv_flight_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/tv_flight_start_time"
+        app:layout_constraintEnd_toStartOf="@id/tv_flight_end_time"
+        app:layout_constraintTop_toTopOf="@id/tv_flight_start_time"
+        app:layout_constraintBottom_toBottomOf="@id/tv_flight_start_day"
+        android:src="@drawable/ic_flight_timeline"
+        android:contentDescription="@string/flight_time"
+        />
+
+    <TextView
+        android:id="@+id/tv_flight_end_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/tv_flight_end_day"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_flight_code"
+        tools:text="09:45"
+        android:textColor="@color/text_color"
+        android:fontFamily="@font/satoshi_bold"
+        android:textSize="16sp"
+        />
+
+    <TextView
+        android:id="@+id/tv_flight_end_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv_flight_end_time"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="16dp"
+        tools:text="Sun, 20 Aug"
+        android:fontFamily="@font/satoshi_medium"
+        android:textSize="12sp"
+        android:layout_marginTop="2dp"
+        android:textColor="@color/text_desc_color"
+        />
+
+    <LinearLayout
+        android:id="@+id/ll_flight_details"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_top_bottom_stroke"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:weightSum="1.2"
+        app:layout_constraintTop_toBottomOf="@id/iv_flight_time">
+
+        <TextView
+            android:id="@+id/tv_flight_details"
+            android:layout_width="0dp"
+            android:layout_weight="0.4"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/flight_details"
+            android:paddingVertical="10dp"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/primary_blue"
+            android:fontFamily="@font/satoshi_bold"
+            android:textSize="14sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_price_details"
+            android:layout_width="0dp"
+            android:layout_weight="0.4"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/iv_flight_image"
+            android:layout_marginStart="16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@string/price_details"
+            android:paddingVertical="10dp"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/primary_blue"
+            android:fontFamily="@font/satoshi_bold"
+            android:textSize="14sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_edit_details"
+            android:layout_width="0dp"
+            android:layout_weight="0.4"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/iv_flight_image"
+            android:layout_marginStart="16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@string/edit_details"
+            android:paddingVertical="10dp"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/primary_blue"
+            android:fontFamily="@font/satoshi_bold"
+            android:textSize="14sp"
+            />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_flight_price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/ll_flight_details"
+        app:layout_constraintStart_toStartOf="@id/ll_flight_details"
+        app:layout_constraintEnd_toEndOf="@id/tv_flight_end_day"
+        tools:text="NGN 124,000"
+        android:padding="16dp"
+        android:layout_gravity="center_vertical"
+        android:textColor="@color/text_color"
+        android:fontFamily="@font/satoshi_bold"
+        android:textSize="16sp"
+        />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FBEAE9"
+        app:layout_constraintTop_toBottomOf="@id/tv_flight_price">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/remove"
+            android:fontFamily="@font/satoshi_bold"
+            android:textColor="#9E0A05"
+            android:textSize="14sp"
+            android:layout_gravity="center_horizontal"
+            android:paddingVertical="24dp"
+            android:drawablePadding="10dp"
+            app:drawableEndCompat="@drawable/ic_close_small" />
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,578 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fillViewport="true"
+    android:fitsSystemWindows="true"
+    tools:context=".presentation.TripDetailFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="24dp">
+
+        <ImageView
+            android:id="@+id/iv_trip_detail_img"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/trip_detail"
+            android:src="@drawable/trip_detail"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/tv_start_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="24dp"
+            android:drawablePadding="4dp"
+            android:fontFamily="@font/satoshi_medium"
+            android:textColor="@color/text_color"
+            android:textSize="12sp"
+            app:drawableStartCompat="@drawable/ic_calendar_small"
+            app:drawableTint="@color/text_color"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_trip_detail_img"
+            tools:text="21 March 2024"
+            />
+
+        <TextView
+            android:id="@+id/tv_end_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:drawablePadding="4dp"
+            android:fontFamily="@font/satoshi_medium"
+            android:textColor="@color/text_color"
+            android:textSize="12sp"
+            app:drawableStartCompat="@drawable/ic_go_right"
+            app:layout_constraintStart_toEndOf="@id/tv_start_date"
+            app:layout_constraintTop_toTopOf="@id/tv_start_date"
+            tools:text="26 March 2024"/>
+
+        <TextView
+            android:id="@+id/tv_trip_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/satoshi_bold"
+            android:text="@string/bahamas_family_trip"
+            android:textColor="@color/text_color"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/tv_start_date"
+            app:layout_constraintTop_toBottomOf="@id/tv_start_date"
+            />
+
+        <TextView
+            android:id="@+id/tv_trip_location_type"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/satoshi_medium"
+            android:lineSpacingExtra="4sp"
+            android:textColor="@color/text_desc_color"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tv_trip_name"
+            app:layout_constraintTop_toBottomOf="@id/tv_trip_name"
+            tools:text="New York,  United States of America |  Solo Trip"/>
+
+        <TextView
+            android:id="@+id/tv_trip_collaboration"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_outline_btn"
+            android:drawablePadding="4dp"
+            android:fontFamily="@font/satoshi_medium"
+            android:lineSpacingExtra="8sp"
+            android:padding="12dp"
+            android:text="@string/trip_collaboration"
+            android:textColor="@color/primary_blue"
+            android:textSize="14sp"
+            app:drawableStartCompat="@drawable/ic_handshake"
+            app:layout_constraintStart_toStartOf="@id/tv_trip_location_type"
+            app:layout_constraintTop_toBottomOf="@id/tv_trip_location_type" />
+
+        <TextView
+            android:id="@+id/tv_share_trip"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_outline_btn"
+            android:drawablePadding="4dp"
+            android:fontFamily="@font/satoshi_medium"
+            android:lineSpacingExtra="8sp"
+            android:paddingHorizontal="32dp"
+            android:paddingVertical="12dp"
+            android:text="@string/share_trip"
+            android:textColor="@color/primary_blue"
+            android:textSize="14sp"
+            app:drawableStartCompat="@drawable/ic_handshake"
+            app:layout_constraintStart_toEndOf="@id/tv_trip_collaboration"
+            app:layout_constraintTop_toBottomOf="@id/tv_trip_location_type" />
+
+        <View
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/ic_ellipsis"
+            app:layout_constraintBottom_toBottomOf="@id/tv_trip_collaboration"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_trip_collaboration"/>
+
+        <LinearLayout
+            android:id="@+id/ll_activities"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/dark_blue"
+            android:orientation="vertical"
+            android:paddingBottom="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tv_trip_collaboration"
+            app:layout_constraintTop_toBottomOf="@id/tv_trip_collaboration"
+            >
+
+            <TextView
+                android:id="@+id/tv_activities"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/satoshi_bold"
+                android:text="@string/activities"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                />
+
+            <TextView
+                android:id="@+id/tv_activities_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="14dp"
+                android:layout_marginEnd="14dp"
+                android:fontFamily="@font/satoshi_regular"
+                android:text="@string/activities_desc"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                />
+
+            <TextView
+                android:id="@+id/tv_add_activities"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="16dp"
+                android:text="@string/add_activities"
+                android:layout_marginHorizontal="14dp"
+                android:background="@drawable/bg_btn"
+                android:layout_marginTop="37dp"
+                android:fontFamily="@font/satoshi_medium"
+                android:textSize="14sp"
+                android:gravity="center_horizontal"
+                android:textColor="@color/white"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_hotels"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/pale_blue"
+            android:orientation="vertical"
+            android:paddingBottom="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tv_trip_collaboration"
+            app:layout_constraintTop_toBottomOf="@id/ll_activities"
+            >
+
+            <TextView
+                android:id="@+id/tv_hotels"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/satoshi_bold"
+                android:text="@string/hotels"
+                android:textColor="@color/text_color"
+                android:textSize="16sp"
+                />
+
+            <TextView
+                android:id="@+id/tv_hotels_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="14dp"
+                android:layout_marginEnd="14dp"
+                android:fontFamily="@font/satoshi_regular"
+                android:text="@string/activities_desc"
+                android:textColor="@color/text_color"
+                android:textSize="14sp"
+                />
+
+            <TextView
+                android:id="@+id/tv_add_hotels"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="16dp"
+                android:text="@string/add_hotels"
+                android:layout_marginHorizontal="14dp"
+                android:background="@drawable/bg_btn"
+                android:layout_marginTop="37dp"
+                android:fontFamily="@font/satoshi_medium"
+                android:textSize="14sp"
+                android:gravity="center_horizontal"
+                android:textColor="@color/white"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_flights"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/primary_blue"
+            android:orientation="vertical"
+            android:paddingBottom="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tv_trip_collaboration"
+            app:layout_constraintTop_toBottomOf="@id/ll_hotels"
+            >
+
+            <TextView
+                android:id="@+id/tv_flights"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/satoshi_bold"
+                android:text="@string/flights"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                />
+
+            <TextView
+                android:id="@+id/tv_flights_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="14dp"
+                android:layout_marginEnd="14dp"
+                android:fontFamily="@font/satoshi_regular"
+                android:text="@string/activities_desc"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                />
+
+            <TextView
+                android:id="@+id/tv_add_flights"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="16dp"
+                android:text="@string/add_flights"
+                android:layout_marginHorizontal="14dp"
+                android:background="@drawable/bg_form"
+                android:layout_marginTop="37dp"
+                android:fontFamily="@font/satoshi_medium"
+                android:textSize="14sp"
+                android:gravity="center_horizontal"
+                android:textColor="@color/primary_blue"
+                />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_trip_it"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ll_flights"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="16dp"
+            android:text="@string/trip_itineraries"
+            android:textColor="@color/text_color"
+            android:fontFamily="@font/satoshi_bold"
+            android:textSize="16sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_your_trip_it"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_trip_it"
+            app:layout_constraintStart_toStartOf="@id/tv_trip_it"
+            android:text="@string/your_trip_itineraries_are_placed_here"
+            android:fontFamily="@font/satoshi_medium"
+            android:textSize="12sp"
+            android:textColor="@color/text_desc_color"
+            />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_flights"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/grey"
+            app:cardCornerRadius="4dp"
+            android:elevation="2dp"
+            app:layout_constraintStart_toStartOf="@id/tv_trip_it"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_your_trip_it"
+            android:layout_marginTop="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="16dp">
+
+                <TextView
+                    android:id="@+id/tv_text_flights"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/satoshi_bold"
+                    android:text="@string/flights"
+                    android:textColor="@color/text_color"
+                    android:textSize="16sp"
+                    android:drawablePadding="10dp"
+                    app:drawableStartCompat="@drawable/ic_airplane" />
+
+                <LinearLayout
+                    android:id="@+id/ll_flights_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_form"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:orientation="vertical"
+                    android:paddingBottom="63dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="53dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/ic_flight_img"
+                        android:contentDescription="@string/flight_image"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="14dp"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/satoshi_bold"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/no_request_yet"
+                        android:textColor="@color/text_color"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/btn_add_flights"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="16dp"
+                        android:text="@string/add_flights"
+                        android:layout_marginHorizontal="49dp"
+                        android:background="@drawable/bg_btn"
+                        android:fontFamily="@font/satoshi_bold"
+                        android:textSize="14sp"
+                        android:layout_marginTop="12dp"
+                        android:gravity="center_horizontal"
+                        android:textColor="@color/white"
+                        />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_hotels"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/bluish_grey"
+            app:cardCornerRadius="4dp"
+            android:elevation="2dp"
+            app:layout_constraintStart_toStartOf="@id/tv_trip_it"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintTop_toBottomOf="@id/cv_flights"
+            android:layout_marginTop="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="16dp">
+
+                <TextView
+                    android:id="@+id/tv_text_hotels"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/satoshi_bold"
+                    android:text="@string/hotels"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:drawablePadding="10dp"
+                    app:drawableStartCompat="@drawable/ic_hotels" />
+
+                <LinearLayout
+                    android:id="@+id/ll_hotels_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_form"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:orientation="vertical"
+                    android:paddingBottom="63dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="53dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/ic_hotels_img"
+                        android:contentDescription="@string/hotels_image"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="14dp"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/satoshi_bold"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/no_request_yet"
+                        android:textColor="@color/text_color"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/btn_add_hotels"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="16dp"
+                        android:text="@string/add_hotels"
+                        android:layout_marginHorizontal="49dp"
+                        android:background="@drawable/bg_btn"
+                        android:fontFamily="@font/satoshi_bold"
+                        android:textSize="14sp"
+                        android:layout_marginTop="12dp"
+                        android:gravity="center_horizontal"
+                        android:textColor="@color/white"
+                        />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/bright_blue"
+            app:cardCornerRadius="4dp"
+            android:elevation="2dp"
+            app:layout_constraintStart_toStartOf="@id/tv_trip_it"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintTop_toBottomOf="@id/cv_hotels"
+            android:layout_marginTop="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="16dp">
+
+                <TextView
+                    android:id="@+id/tv_text_activities"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/satoshi_bold"
+                    android:text="@string/activities"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:drawablePadding="10dp"
+                    app:drawableStartCompat="@drawable/ic_activities" />
+
+                <LinearLayout
+                    android:id="@+id/ll_activities_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_form"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:orientation="vertical"
+                    android:paddingBottom="63dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="53dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/ic_activities_img"
+                        android:contentDescription="@string/activities_image"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="14dp"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/satoshi_bold"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/no_request_yet"
+                        android:textColor="@color/text_color"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/btn_add_activities"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="16dp"
+                        android:text="@string/add_activities"
+                        android:layout_marginHorizontal="49dp"
+                        android:background="@drawable/bg_btn"
+                        android:fontFamily="@font/satoshi_bold"
+                        android:textSize="14sp"
+                        android:layout_marginTop="12dp"
+                        android:gravity="center_horizontal"
+                        android:textColor="@color/white"
+                        />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
